@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, onCreate } from "react";
 
 const DiaryEditor = () => {
 
@@ -42,7 +42,14 @@ const DiaryEditor = () => {
             return;
         }
 
+        onCreate(state.autorh, state.content, state.emotion);
         alert("저장 성공!");
+        // 작성폼 초기화
+        setState({
+            author: "",
+            content: "",
+            emotion: 1,
+        });
     }
     return (
         <div className="DiaryEditor">
