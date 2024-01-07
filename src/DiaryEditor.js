@@ -1,6 +1,7 @@
-import { useRef, useState, onCreate } from "react";
+import { useRef, useState } from "react";
 
-const DiaryEditor = () => {
+// onCreate - 새로운 item 이 추가될 때 list(state)에 추가시켜주는 함수
+const DiaryEditor = ({onCreate}) => {
 
     // useRef: DOM 요소를 다룰 수 있게 해줌
     const authorInput = useRef();
@@ -42,7 +43,7 @@ const DiaryEditor = () => {
             return;
         }
 
-        onCreate(state.autorh, state.content, state.emotion);
+        onCreate(state.author, state.content, state.emotion);
         alert("저장 성공!");
         // 작성폼 초기화
         setState({

@@ -1,6 +1,7 @@
 import DiaryItem from './DiaryItem'
 
-const DiaryList = ({ diaryList }) => {
+// onDelete - props drilling
+const DiaryList = ({ onDelete, diaryList }) => {
     // console.log("props 확인 ");
     // diaryList.map((member) => console.log(JSON.stringify(member)));
     return (
@@ -11,7 +12,7 @@ const DiaryList = ({ diaryList }) => {
                 {diaryList.map((it) =>
                     // idx는 바뀔 수 있어서 지양
                     // <div key={idx}>s
-                    <DiaryItem key = {it.id} {...it} />
+                    <DiaryItem key = {it.id} {...it} onDelete = {onDelete} />
                 )}
             </div>
         </div>
