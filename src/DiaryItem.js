@@ -1,25 +1,43 @@
-const DiaryItem = ({ onDelete, author, content, created_date, emotion, id }) => {
+import { useState } from "react";
+
+const DiaryItem = ({ onRemove, author, content, created_date, emotion, id }) => {
+
+    const [isEdit, setIsEdit] = useState(false);
+    const toggleIsEdit = () => setIsEdit(!isEdit);
+    const [localContent, setLocalContent] = useState("");
+
+    const handleRemove = () => {
+        if (window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)) {
+            onRemove(id);
+        }
+    }
+
+
     return (
         <div claassName="DiaryItem">
             <div className="info">
                 <span>
                     작성자: {author} | 감정점수: {emotion}
                 </span>
-                <br/>
+                <br />
                 <span className="date">{new Date(created_date).toLocaleDateString()}</span>
             </div>
-            <div className="content">{content}</div>
-            <button 
-                onClick={() => { 
-                    // console.log("삭제 item - "+id);
-                    if(window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)){
-                        onDelete(id);
-                    }
-                }}>
-            삭제하기
-            </button>
+            <div className="content">
+                {isEdit ? (
+                    <>
+                        <textarea 
+                            value = {localContent}
+                            onChange = {(e) => setLocalContent(e.target.value)}
+                        />
+                    </>
+                ) : (
+                    <>{content}</>
+                )}
+            </div>
+            <button onClick={handleRemove}>삭제하기</button>
+            <button onClick={toggleIsEdit}>수정하기</button>
         </div>
     );
-}   
+}
 
 export default DiaryItem;
